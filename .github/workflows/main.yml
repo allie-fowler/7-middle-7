@@ -25,7 +25,11 @@ jobs:
         
       - name: Setup Python
         uses: actions/setup-python@v2
-      - run: python scripts/get_price_history.py ${symbol}
+      - run: |
+          for symbol in `cat input/workspace.sym` 
+          do 
+            python scripts/get_price_history.py ${symbol}
+          done
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
