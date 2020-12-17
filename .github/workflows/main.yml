@@ -25,7 +25,7 @@ jobs:
         
       - name: Setup Python
         uses: actions/setup-python@v2
-      - run: scripts/get_price_history.py ${symbol}
+      - run: python scripts/get_price_history.py ${symbol}
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
