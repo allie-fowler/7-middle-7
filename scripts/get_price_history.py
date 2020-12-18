@@ -32,8 +32,10 @@ def main():
         if opt == "-s":
             symbol = arg
         else:
-            print ('Option was ' + opt)
-            print ('Argument was ' + arg)       
+            print ('Options were: ')
+            print (opt)
+            print ('Arguments were: ')  
+            print (args)
             usage()
             sys.exit
     
