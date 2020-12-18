@@ -13,7 +13,7 @@ def lookup(my_symbol):
 
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ho:v:s", ["help", "output="])
+        opts, args = getopt.getopt(sys.argv[1:], "ho:v:s", ["help", "symbol="])
         print('Opts are ')
         print(opts)
         print('Args are ')
@@ -29,17 +29,16 @@ def main():
         if opt in ("-h", "--help"):
             usage()
             sys.exit()
-        elif opt == "-s":
+        elif opt == ("-s", "--symbol="):
             symbol = arg
         elif opt == "-v":
             verbose = True
         else:
             usage()
             sys.exit
-        print ('Option was: ')
-        print (opt)
-        print ('Argument was: ')  
-        print (arg)
+     print('Option was: ', opt)
+     print('Argument was: ', arg)  
+     print('Symbol is : ', symbol)   
             
     
     if symbol == "":
