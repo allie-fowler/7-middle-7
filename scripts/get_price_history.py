@@ -31,7 +31,7 @@ def main():
             verbose = True
         if opt == "-s":
             symbol = arg
-        else
+        else:
             print ('Option was ' + opt)
             print ('Argument was ' + arg)       
             usage()
