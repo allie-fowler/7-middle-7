@@ -10,8 +10,9 @@ def usage():
 
 
 def lookup(my_symbol):
+    print("Local symbol is ", my_symbol)
     from googlefinance.get import get_datum
-    df=get_datum(my_symbol, period='11Y', interval=86400)
+    df = get_datum(my_symbol, period='11Y', interval=86400)
     print(df)
 
 
