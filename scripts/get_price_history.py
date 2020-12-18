@@ -11,9 +11,10 @@ def usage():
 
 def lookup(my_symbol):
     print("Local symbol is ", my_symbol)
-    from googlefinance.get import get_code('NASDAQ')
+    from googlefinance.get import get_code
+    get_code('NASDAQ')
     from googlefinance.get import get_datum
-    df = get_datum(my_symbol, period='11M', interval=86400)
+    df = get_datum("NASDAQ:"my_symbol, period='11M', interval=86400)
     print(df)
 
 
