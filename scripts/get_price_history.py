@@ -38,9 +38,9 @@ def main():
             usage()
             sys.exit
             
-     print('Option was: ', opt)
-     print('Argument was: ', arg)  
-     print('Symbol is : ', symbol)             
+    print('Option was: ', opt)
+    print('Argument was: ', arg)  
+    print('Symbol is : ', symbol)             
     
     if symbol == "":
           usage()
