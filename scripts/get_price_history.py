@@ -29,11 +29,11 @@ def main():
         if opt in ("-h", "--help"):
             usage()
             sys.exit()
-        if opt == "-v":
-            verbose = True
-        if opt == "-s":
+        elif opt == "-s":
             symbol = arg
-        else:
+        elif opt == "-v":
+            verbose = True
+        elif:
             print ('Option was: ')
             print (opt)
             print ('Argument was: ')  
