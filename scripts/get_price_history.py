@@ -1,16 +1,20 @@
 #!/usr/bin/python
 
-import getopt, sys
+import getopt
+import sys
+
 
 def usage():
     print("Usage:")
     print("get_price_history.py [ -h | --help ] [ -v | --verbose ] -s <SYMBOL>")
 
+    
 def lookup(my_symbol):
     from googlefinance.get import get_datum
-    df = get_datum(my_symbol, period='11Y', interval =86400)
+    df = get_datum(my_symbol,period='11Y',interval =86400)
     print(df)
 
+    
 def main():
     symbol = ""
     verbose = False
@@ -19,7 +23,7 @@ def main():
         print('Opts are ')
         print(opts)
         print('Args are ')
-        print(args) 
+        print(args)
     except getopt.GetoptError as err:
         # print help information and exit:
         print(err)  # will print something like "option -a not recognized"
@@ -33,22 +37,23 @@ def main():
             usage()
             sys.exit()
         elif opt in ("-s", "--symbol="):
-            symbol = arg 
+            symbol = arg
         else:
             assert False, "unhandled option"
             usage()
             sys.exit
-            
-    print('Option was: ', opt)
-    print('Argument was: ', arg)  
-    print('Symbol is : ', symbol)             
+    
+    if verbose:
+        print('Option is: ', opt)
+        print('Argument is: ', arg)
+        print('Symbol is : ', symbol)
     
     if symbol == "":
-          usage()
-          sys.exit()
-          
-    lookup(symbol.upper()) 
+        usage()
+        sys.exit()
+        
+    lookup(symbol.upper())
 
+    
 if __name__ == "__main__":
     main()
-
