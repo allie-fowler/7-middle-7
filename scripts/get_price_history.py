@@ -26,20 +26,21 @@ def main():
     symbol = ""
     verbose = False
     for opt, arg in opts:
-        if opt in ("-h", "--help"):
+        if opt == "-v":
+            verbose = True
+        elif opt in ("-h", "--help"):
             usage()
             sys.exit()
-        elif opt == ("-s", "--symbol="):
-            symbol = arg
-        elif opt == "-v":
-            verbose = True
+        elif opt in ("-s", "--symbol="):
+            symbol = arg 
         else:
+            assert False, "unhandled option"
             usage()
             sys.exit
+            
      print('Option was: ', opt)
      print('Argument was: ', arg)  
-     print('Symbol is : ', symbol)   
-            
+     print('Symbol is : ', symbol)             
     
     if symbol == "":
           usage()
