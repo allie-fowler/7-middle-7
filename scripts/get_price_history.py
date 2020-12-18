@@ -13,7 +13,7 @@ def lookup(my_symbol):
 
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ho:v:s", ["help", "symbol="])
+        opts, args = getopt.getopt(sys.argv[1:], "hs:v", ["help", "symbol="])
         print('Opts are ')
         print(opts)
         print('Args are ')
