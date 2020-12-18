@@ -33,13 +33,14 @@ def main():
             symbol = arg
         elif opt == "-v":
             verbose = True
-        elif:
-            print ('Option was: ')
-            print (opt)
-            print ('Argument was: ')  
-            print (arg)
+        else:
             usage()
             sys.exit
+        print ('Option was: ')
+        print (opt)
+        print ('Argument was: ')  
+        print (arg)
+            
     
     if symbol == "":
           usage()
