@@ -14,8 +14,10 @@ def lookup(my_symbol):
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "ho:v:s", ["help", "output="])
-        print ('Opts are ' + opts)
-        print ('Args are ' + args)
+        print('Opts are ')
+        print(opts)
+        print('Args are ')
+        print(args) 
     except getopt.GetoptError as err:
         # print help information and exit:
         print(err)  # will print something like "option -a not recognized"
