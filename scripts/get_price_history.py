@@ -30,12 +30,14 @@ def main():
         else:
             symbol = a
     
-    if symbol == "":
-          usage()
-          sys.exit()
+    if verbose:
+        print('Symbol is ' + symbol)  
+        
+    if symbol == "":      
+      usage()
+      sys.exit()
           
     lookup(symbol.upper()) 
 
 if __name__ == "__main__":
     main()
-
