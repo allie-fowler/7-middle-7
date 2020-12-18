@@ -14,7 +14,7 @@ def lookup(my_symbol):
     from googlefinance.get import get_code
     get_code('NASDAQ')
     from googlefinance.get import get_datum
-    df = get_datum("NASDAQ:"my_symbol, period='11M', interval=86400)
+    df = get_datum("NASDAQ:PSA", period='11M', interval=86400)
     print(df)
 
 
