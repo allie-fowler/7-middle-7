@@ -12,6 +12,8 @@ def lookup(my_symbol):
     print(df)
 
 def main():
+    symbol = ""
+    verbose = False
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hs:v", ["help", "symbol="])
         print('Opts are ')
@@ -23,8 +25,7 @@ def main():
         print(err)  # will print something like "option -a not recognized"
         usage()
         sys.exit(2)
-    symbol = ""
-    verbose = False
+
     for opt, arg in opts:
         if opt == "-v":
             verbose = True
