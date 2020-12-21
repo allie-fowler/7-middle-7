@@ -10,6 +10,9 @@ for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
 do
   for period in  front middle back
   do
-    export ${month}_${period}=0
+    for direction in up side down
+    do
+      export ${month}_${period}_${direction}=0
+    done
   done
 done
