@@ -4,7 +4,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ bogus ]
   pull_request:
     branches: [ main ]
 
@@ -41,7 +41,9 @@ jobs:
           set -x
           for symbol in `cat input/workspace.sym` 
           do 
-            python scripts/get_price_history.py -s ${symbol}
+            echo "Price history must be added manually for now."
+            echo "Download 11 years of history using Yahoo's DOWNLOAD button"
+            #python scripts/get_price_history.py -s ${symbol}
           done
 
       # - name: Test with pytest
