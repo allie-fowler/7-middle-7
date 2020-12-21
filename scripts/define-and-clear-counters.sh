@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 # Set threshold that defines "sideways"
 # May have to change this for various symbols
 
@@ -13,7 +13,3 @@ do
     export ${month}_${period}=0
   done
 done
-
-set | grep front
-set | grep middle
-set | grep back
