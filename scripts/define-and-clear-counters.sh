@@ -17,5 +17,5 @@ do
   done
 done
 
-today=$( date +”%Y %b %m” )
+today=$( date +”%Y-%m-%d” )
 echo "This job was run ${today}."
