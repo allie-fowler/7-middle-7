@@ -5,7 +5,7 @@
 
 is_past () {
 # parameters:  today's date YYYY-MM-DD, comparison year YYYY, comparison month MM, comparison day DD
-  if [ "$1" <= "${2}-${3}-${4}" ]
+  if [[ ! "$1" > "${2}-${3}-${4}" ]]
   then 
     if [ "$verbose" = true ]; then echo "This date is after today.  Not valid." ; fi
     return 1;  # 1 is false
