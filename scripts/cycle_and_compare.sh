@@ -99,6 +99,7 @@ while true; do
 done
 remaining=("$@")
 
+source scripts/define-and-clear-counters.sh
 this_year=$(echo ${today} | awk ' { print $1 } ')
 # Cycle through the last 11 years
 for (( year=${this_year}; year>=${year}-11; year-- ))
