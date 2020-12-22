@@ -85,10 +85,10 @@ do
     
     # Process for last 7 days of month
     # get close of latest trading day of range  
-    latest_close=$(latest_trade_close_of_range(27 31 "${month}" "${year}"))
+    latest_close=$( latest_trade_close_of_range 27 31 "${month}" "${year}" )
       
     # get close of earliest trading day of range 
-    earliest_close=$(earliest_trade_close_of_range(20 25 "${month}" "${year}"))
+    earliest_close=$( earliest_trade_close_of_range 20 25 "${month}" "${year}" )
     
     # Increment appropriate counter
         
