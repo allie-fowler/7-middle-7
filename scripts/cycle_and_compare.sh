@@ -36,11 +36,11 @@ local year=$4
       continue
     else
       # get the back_b close and break the loop.  if not there, discontinue this iteration and go on with next value
-      if $(grep "${year}-${month}-${i}" ${symbol}.csv) 
+      if $(grep "${year}-${month}-${i}" "${symbol}".csv) 
       then
         # Grab the adjusted close
          
-        latest_close=$( grep "${year}-${month}-${i}" ${symbol}.csv | awk ' { print $6 } ' )
+        latest_close=$( grep "${year}-${month}-${i}" "${symbol}".csv | awk ' { print $6 } ' )
         echo "${latest_close}"
         break  # We found the day, no need to keep iterating
       else
@@ -81,7 +81,7 @@ local year=$4
 }  # earliest_trade_close_of_range
 
 # main -------------
-verbose=false
+verbose=1
 # list of arguments expected in the input
 # We use "$@" instead of $* to preserve argument-boundary information
 ARGS=$(getopt -o 'h:v' --long 'help::,verbose' -- "$@") || exit
@@ -90,7 +90,7 @@ eval "set -- $ARGS"
 while true; do
     case $1 in
       (-v|--verbose)
-            ((verbose=true)); shift;;
+            ((verbose=0)); shift;;
       (-h|--help)
             usage;;
       (--)  shift; break;;
@@ -98,6 +98,7 @@ while true; do
     esac
 done
 remaining=("$@")
+if [ "$verbose" = true ]; then echo "Arguments not processed yet: ${remaining}" ; fi
 
 source scripts/define-and-clear-counters.sh
 this_year=$(echo ${today} | awk ' { print $1 } ')
