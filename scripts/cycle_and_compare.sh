@@ -3,6 +3,11 @@
 # Compares for each segment of each past month
 # Tallies the counters
 
+function usage {
+        echo "./$(basename $0) [-v] [-h] "
+        echo "   Steps through past 11 years of history and compares each 7-m-7 segment of each past month."
+}
+
 is_past () {
 # parameters:  today's date YYYY-MM-DD, comparison year YYYY, comparison month MM, comparison day DD
   if [[ ! "$1" > "${2}-${3}-${4}" ]]
@@ -74,6 +79,27 @@ local year=$4
     fi
   done
 }  # earliest_trade_close_of_range
+
+# main -------------
+export verbose=false
+# list of arguments expected in the input
+optstring=":hv"
+
+while getopts ${optstring} arg; do
+  case ${arg} in
+    v)
+      export verbose=true
+      ;;
+    h)
+      f [ "$verbose" = true ]; then echo "showing usage!" ; fi
+      usage
+      ;;
+    ?)
+      echo "Invalid option: -${OPTARG}."
+      exit 2
+      ;;
+  esac
+done
 
 this_year=$(echo ${today} | awk ' { print $1 } ')
 # Cycle through the last 11 years
