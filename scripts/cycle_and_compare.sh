@@ -36,7 +36,7 @@ local year=$4
       continue
     else
       # get the back_b close and break the loop.  if not there, discontinue this iteration and go on with next value
-      if $(grep "${year}-${month}-${i}" "${symbol}".csv) 
+      if grep "${year}-${month}-${i}" "${symbol}".csv
       then
         # Grab the adjusted close
          
@@ -66,7 +66,7 @@ local year=$4
       continue
     else
       # get the front close and break the loop.  if not there, discontinue this iteration and go on with next value
-      if $(grep "${year}-${month}-${i}" ${symbol}.csv) 
+      if grep "${year}-${month}-${i}" ${symbol}.csv
       then
         # Grab the adjusted close
          
