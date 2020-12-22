@@ -1,6 +1,7 @@
 #!/bin/bash
 # Steps through past 11 years
 # Compares for each segment of each past month
+# Tallies the counters
 
 is_past () {
 # parameters:  today's date YYYY-MM-DD, comparison year YYYY, comparison month MM, comparison day DD
