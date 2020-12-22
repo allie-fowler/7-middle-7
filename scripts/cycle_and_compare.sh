@@ -81,25 +81,23 @@ local year=$4
 }  # earliest_trade_close_of_range
 
 # main -------------
-export verbose=false
+verbose=false
 # list of arguments expected in the input
-optstring=":hv"
+# We use "$@" instead of $* to preserve argument-boundary information
+ARGS=$(getopt -o 'h:v' --long 'help::,verbose' -- "$@") || exit
+eval "set -- $ARGS"
 
-while getopts ${optstring} arg; do
-  case ${arg} in
-    v)
-      export verbose=true
-      ;;
-    h)
-      f [ "$verbose" = true ]; then echo "showing usage!" ; fi
-      usage
-      ;;
-    ?)
-      echo "Invalid option: -${OPTARG}."
-      exit 2
-      ;;
-  esac
+while true; do
+    case $1 in
+      (-v|--verbose)
+            ((verbose=true)); shift;;
+      (-h|--help)
+            usage;;
+      (--)  shift; break;;
+      (*)   exit 1;;           # error
+    esac
 done
+remaining=("$@")
 
 this_year=$(echo ${today} | awk ' { print $1 } ')
 # Cycle through the last 11 years
