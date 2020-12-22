@@ -25,7 +25,7 @@ local year=$4
   for ((i=$day2;i<=$day1;i--)); do
     if [ "$verbose" = true ]; then echo "Evaluating ${month} ${i}, ${year}" ; fi
     
-    if [ is_past "${today}" "${year}" "${month}" "${i}"  ]
+    if is_past "${today}" "${year}" "${month}" "${i}" 
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
       continue
@@ -55,7 +55,7 @@ local year=$4
   for ((i=$day2;i>=$day1;i++)); do
     if [ "$verbose" = true ]; then echo "Evaluating ${month} ${i}, ${year}" ; fi
     
-    if [ is_past("${today}" "${year}" "${month}" "${i}" ) ]
+    if is_past("${today}" "${year}" "${month}" "${i}" )
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
       continue
