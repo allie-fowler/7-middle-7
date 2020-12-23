@@ -102,7 +102,7 @@ do
 done
  
 source scripts/define-and-clear-counters.sh
-this_year=$(echo "${today}" | cut -c 2-7)
+this_year=$(echo "${today}" | cut -c 8-13)
 # Cycle through the last 11 years
 for (( year=this_year; year>=year-11; year-- ))
 do
