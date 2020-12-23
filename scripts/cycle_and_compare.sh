@@ -3,6 +3,8 @@
 # Compares for each segment of each past month
 # Tallies the counters
 
+set -x
+
 function usage {
         echo "./$(basename "$0") [-v] [-h] "
         echo "   Steps through past 11 years of history and compares each 7-m-7 segment of each past month."
@@ -119,7 +121,15 @@ do
     # get close of earliest trading day of range 
     earliest_close=$( earliest_trade_close_of_range 20 25 "${month}" "${year}" )
     
-    # Increment appropriate counter
+    if latest_close >= earliest_close*(1+sideways_threshold)
+    then
+      export ${month}_${period}_up++
+    elif latest_close <= earliest_close*(1-sideways_threshold)
+    then
+      export ${month}_${period}_down++
+    else
+      export ${month}_${period}_side++
+    fi
         
     # Process for middle 7
       # Find first market day on or after 10th
@@ -127,3 +137,10 @@ do
     # Process for front 7
   done  # month
 done  # year
+
+# Cycle through months and directions
+for month in 1 2 3 4 5 6 7 8 9 10 11 12
+  do
+    echo "Month:  "${month}"   UP: "${month}_${period}_up"  DOWN:  "${month}_${period}_down"      SIDEWAYS:  "${month}_${period}_down
+  done
+  
