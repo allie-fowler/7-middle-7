@@ -29,7 +29,7 @@ jobs:
       ################################
       # Run Linter against code base #
       ################################
-      - name: Lint Code Base
+      - name: SuperLinter
         uses: github/super-linter@v3
         env:
           VALIDATE_ALL_CODEBASE: false
@@ -65,7 +65,7 @@ jobs:
             echo "Price history must be added manually for now."
             echo "Download 11 years of history using Yahoo's DOWNLOAD button"
             #python scripts/get_price_history.py -s ${symbol}
-            bash scripts/cycle_and_compare.sh -s ${symbol}
+            bash scripts/cycle_and_compare.sh -s PSA
           done
 
       # - name: Run a test like with pytest
