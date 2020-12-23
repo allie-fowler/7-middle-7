@@ -27,7 +27,7 @@ local day2=$2
 local month=$3
 local year=$4
 
-  for (( i=$day2; i<=$day1; i-- )); do
+  for (( i=day2; i<=day1; i-- )); do
     if [ "$verbose" = true ]; then echo "Evaluating $month $i, $year" ; fi
     
     if is_past "${today}" "$year" "$month" "$i" 
@@ -57,7 +57,7 @@ local day2=$2
 local month=$3
 local year=$4
 
-  for (( i=$day2; i>=$day1; i++ )); do
+  for (( i=day2; i>=day1; i++ )); do
     if [ "$verbose" = true ]; then echo "Evaluating $month $i, $year" ; fi
     
     if is_past "${today}" "$year" "$month" "$i" 
@@ -106,7 +106,7 @@ done
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | awk ' { print $1 } ')
 # Cycle through the last 11 years
-for (( year=$this_year; year>=$year-11; year-- ))
+for (( year=this_year; year>=year-11; year-- ))
 do
   for month in 1 2 3 4 5 6 7 8 9 10 11 12
   do
