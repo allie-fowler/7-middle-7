@@ -12,7 +12,7 @@ do
   do
     for direction in up side down
     do
-      myvariable="${month}_{!period}_{!direction}"
+      myvariable="${month}_{period}_{direction}"
       export "${myvariable}"=0
     done
   done
