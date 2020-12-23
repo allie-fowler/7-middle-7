@@ -119,7 +119,8 @@ do
     
     if latest_close >= earliest_close*$((1+sideways_threshold))
     then
-      export [month]_[period]_up++
+      export "{!month}_{!period}_up}"++
+
     elif latest_close <= earliest_close*$((1-sideways_threshold))
     then
       export $month_$period_down++
