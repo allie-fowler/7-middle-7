@@ -117,10 +117,10 @@ do
     # get close of earliest trading day of range 
     earliest_close=$( earliest_trade_close_of_range 20 25 "${month}" "${year}" )
     
-    if latest_close >= earliest_close*(1+sideways_threshold)
+    if latest_close >= earliest_close*$((1+sideways_threshold))
     then
       export ${month}_${period}_up++
-    elif latest_close <= earliest_close*(1-sideways_threshold)
+    elif latest_close <= earliest_close*$((1-sideways_threshold))
     then
       export ${month}_${period}_down++
     else
