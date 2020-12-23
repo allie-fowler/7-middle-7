@@ -100,8 +100,8 @@ while true; do
       (*)   echo "Invalid argument" ; exit 1;;           # error
     esac
 done
-remaining=("$@")
-if [ "$verbose" = true ]; then echo "Arguments not processed yet: ${remaining[@]}" ; fi
+#remaining=("$@")
+#if [ "$verbose" = true ]; then echo "Arguments not processed yet: ${remaining" ; fi
 
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | awk ' { print $1 } ')
