@@ -1,10 +1,10 @@
 #!/bin/bash
-
+set -x
 # Set threshold that defines "sideways"
 # May have to change this for various symbols
 
 # 3% should be written as 0.03, for example
-sideways_threshold=0.03
+export sideways_threshold=0.04
 
 for month in {1..12}
 do
@@ -12,7 +12,7 @@ do
   do
     for direction in up side down
     do
-      export ${month}_${period}_${direction}=0
+      export "{!month}_{!period}_{!direction}"=0
     done
   done
 done
