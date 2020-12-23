@@ -102,29 +102,29 @@ do
 done
  
 source scripts/define-and-clear-counters.sh
-this_year=$(echo "${today}" | awk ' { print $1 } ')
+this_year=$(echo "${today}" | awk -f "-" ' { print $1 } ')
 # Cycle through the last 11 years
 for (( year=this_year; year>=year-11; year-- ))
 do
   for month in 1 2 3 4 5 6 7 8 9 10 11 12
   do
-    echo "Processing for Month: ${month} Year: ${year}"
+    echo "Processing for Month: $month Year: $year"
     
     # Process for last 7 days of month
     # get close of latest trading day of range  
-    latest_close=$( latest_trade_close_of_range 27 31 "${month}" "${year}" )
+    latest_close=$( latest_trade_close_of_range 27 31 "$month" "$year" )
       
     # get close of earliest trading day of range 
-    earliest_close=$( earliest_trade_close_of_range 20 25 "${month}" "${year}" )
+    earliest_close=$( earliest_trade_close_of_range 20 25 "$month" "$year" )
     
     if latest_close >= earliest_close*$((1+sideways_threshold))
     then
-      export ${month}_${period}_up++
+      export $month_$period_up++
     elif latest_close <= earliest_close*$((1-sideways_threshold))
     then
-      export ${month}_${period}_down++
+      export $month_$period_down++
     else
-      export ${month}_${period}_side++
+      export $month_$period_side++
     fi
         
     # Process for middle 7
@@ -137,5 +137,5 @@ done  # year
 # Cycle through months and directions
 for month in 1 2 3 4 5 6 7 8 9 10 11 12
   do
-    echo "Month:  ${month}   UP: ${[month]_[period]_up}  DOWN:  ${[month]_[period]_down}      SIDEWAYS:  ${[month]_[period]_side}"
+    echo "Month:  $month   UP: ${[month]_[period]_up}  DOWN:  ${[month]_[period]_down}      SIDEWAYS:  ${[month]_[period]_side}"
   done
