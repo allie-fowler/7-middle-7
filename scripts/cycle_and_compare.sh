@@ -86,19 +86,26 @@ local year=$4
 verbose=1
 # list of arguments expected in the input
 # We use "$@" instead of $* to preserve argument-boundary information
-ARGS=$(getopt -o 'h:v:s' --long 'help::,verbose::,symbol' -- "$@") || exit
+ARGS=$(getopt -o 'hvs:' --long 'help,verbose,symbol:' -- "$@") || exit
 eval "set -- $ARGS"
 
 while true; do
     case $1 in
       (-v|--verbose)
-            ((verbose=0)); shift;;
+            ((verbose=0))
+            echo "Verbose mode is enabled."
+            shift
+            ;;
       (-h|--help)
-            usage;;
+            usage
+            ;;
       (-s|--symbol)
         symbol="${OPTARG}"
         ;;
       (--)  shift; break;;
+      (:)   # If expected argument omitted:
+        echo "Error: -${OPTARG} requires an argument."
+        exit_abnormal;;
       (*)   echo "Invalid argument" ; exit 1;;           # error
     esac
 done
