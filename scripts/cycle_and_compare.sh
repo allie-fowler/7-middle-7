@@ -105,7 +105,7 @@ this_year=$(echo "${today}" | cut -c 2-7)
 # Cycle through the last 11 years
 for (( year=this_year; year>=year-11; year-- ))
 do
-  for month in 1 2 3 4 5 6 7 8 9 10 11 12
+  for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
   do
     echo "Processing for Month: $month Year: $year"
     
@@ -135,7 +135,7 @@ do
 done  # year
 
 # Cycle through months and directions
-for month in 1 2 3 4 5 6 7 8 9 10 11 12
+for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
   do
     echo "Month:  $month   UP: ${[month]_[period]_up}  DOWN:  ${[month]_[period]_down}      SIDEWAYS:  ${[month]_[period]_side}"
   done
