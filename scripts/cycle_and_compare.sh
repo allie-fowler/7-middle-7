@@ -86,32 +86,21 @@ local year=$4
 verbose=1
 # list of arguments expected in the input
 # We use "$@" instead of $* to preserve argument-boundary information
-ARGS=$(getopt -o 'hvs:' --long 'help,verbose,symbol:' -- "$@") || exit
-eval "set -- $ARGS"
-
-while true; do
-    case $1 in
-      (-v|--verbose)
-            ((verbose=0))
-            echo "Verbose mode is enabled."
-            shift
-            ;;
-      (-h|--help)
-            usage
-            ;;
-      (-s|--symbol)
-        symbol="${OPTARG}"
-        ;;
-      (--)  shift; break;;
-      (:)   # If expected argument omitted:
-        echo "Error: -${OPTARG} requires an argument."
-        exit_abnormal;;
-      (*)   echo "Invalid argument" ; exit 1;;           # error
-    esac
+while getopts hvs: name
+do
+     case $name in
+     v)   verbose=0
+          ;;
+     h)   usage
+          ;;
+     s)   symbol="$OPTARG"
+          ;;
+     ?)   usage
+          exit 2
+          ;;
+     esac
 done
-#remaining=("$@")
-#if [ "$verbose" = true ]; then echo "Arguments not processed yet: ${remaining" ; fi
-
+ 
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | awk ' { print $1 } ')
 # Cycle through the last 11 years
