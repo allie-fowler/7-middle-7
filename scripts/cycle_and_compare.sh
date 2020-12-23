@@ -148,6 +148,5 @@ done  # year
 # Cycle through months and directions
 for month in 1 2 3 4 5 6 7 8 9 10 11 12
   do
-    echo "Month:  "${month}"   UP: "${month}_${period}_up"  DOWN:  "${month}_${period}_down"      SIDEWAYS:  "${month}_${period}_down
+    echo "Month:  ${month}"   UP: ${${month}_${period}_up}  DOWN:  ${${month}_${period}_down}      SIDEWAYS:  ${${month}_${period}_down}
   done
-  
