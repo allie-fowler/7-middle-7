@@ -40,7 +40,7 @@ jobs:
             
   # This workflow contains a 2nd job called "build"
   build:
-    needs: [super-lint]
+    needs: [lint-the-code]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
