@@ -6,13 +6,14 @@ set -x
 # 3% should be written as 0.03, for example
 export sideways_threshold=0.04
 
-for month in {1..12}
+for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
 do
   for period in  front middle back
   do
     for direction in up side down
     do
-      export "{!month}_{!period}_{!direction}"=0
+      myvariable="${month}_{!period}_{!direction}"
+      export "${myvariable}"=0
     done
   done
 done
