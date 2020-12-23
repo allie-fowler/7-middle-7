@@ -11,7 +11,8 @@ function usage {
 
 is_past () {
 # parameters:  today's date YYYY-MM-DD, comparison year YYYY, comparison month MM, comparison day DD
-  if [[ ! "$1" > "${2}-${3}-${4}" ]]
+# (( $(date -d "2014-12-01T21:34:03+02:00" +%s) < $(date -d "2014-12-01T21:35:03+02:00" +%s) ))
+  if [[ ! (( $(date -d "$1" +%s) > $(date -d "${3} ${4} ${2}" +%s) )) ]]
   then 
     if [ "$verbose" = true ]; then echo "This date is after today.  Not valid." ; fi
     return 1;  # 1 is false
@@ -40,8 +41,8 @@ local year=$4
       if grep "$year-$month-$i" "${symbol}".csv
       then
         # Grab the adjusted close
-         
-        latest_close=$( grep "${year}-${month}-${i}" "${symbol}".csv | awk ' { print $6 } ' )
+        grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%d) 
+        latest_close=$( grep "${grepdate}" "${symbol}".csv | awk ' { print $6 } ' )
         echo "${latest_close}"
         break  # We found the day, no need to keep iterating
       else
