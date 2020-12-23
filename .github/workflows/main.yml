@@ -36,6 +36,7 @@ jobs:
           DEFAULT_BRANCH: main
           ERROR_ON_MISSING_EXEC_BIT: false
           VALIDATE_BASH_EXEC: false
+          OUTPUT_DETAILS: detailed
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
   # This workflow contains a 2nd job called "build"
