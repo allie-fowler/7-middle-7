@@ -82,7 +82,7 @@ local year=$4
     fi
   done
   
-  echo ${earliest_close}
+  echo "${earliest_close}"
 }  # earliest_trade_close_of_range
 
 # main -------------
