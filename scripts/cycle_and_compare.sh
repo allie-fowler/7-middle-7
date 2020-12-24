@@ -49,7 +49,8 @@ local year=$4
       fi
     fi
   done
-  return "${latest_close}"
+   if [ "$verbose" = true ]; then echo "latest_close day was latest_close" ; fi
+  return latest_close
 
 }  # latest_trade_close_of_range
 
@@ -82,8 +83,8 @@ local year=$4
       fi
     fi
   done
-  
-  return "${earliest_close}"
+  if [ "$verbose" = true ]; then echo "earliest_close day was earliest_close" ; fi
+  return earliest_close
 }  # earliest_trade_close_of_range
 
 # main -------------
