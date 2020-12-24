@@ -19,7 +19,7 @@ is_past () {
   else 
     if [ "$verbose" = true ]; then echo "This date is past.  Valid for evaluation." ; fi
     return 0;  # 0 is true
-  fi
+  fi  
 }
 
 latest_trade_close_of_range() {
@@ -49,7 +49,7 @@ local year=$4
       fi
     fi
   done
-  echo "${latest_close}"
+  return "${latest_close}"
 
 }  # latest_trade_close_of_range
 
@@ -64,6 +64,7 @@ local year=$4
     if [ "$verbose" = true ]; then echo "Evaluating $month $i, $year" ; fi
     
     if is_past "${today}" "$year" "$month" "$i" 
+    if [ "$verbose" = true ]; then echo "is_past function returned $?" ; fi
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
       continue
@@ -82,7 +83,7 @@ local year=$4
     fi
   done
   
-  echo "${earliest_close}"
+  return "${earliest_close}"
 }  # earliest_trade_close_of_range
 
 # main -------------
@@ -116,9 +117,11 @@ do
     # Process for last 7 days of month
     # get close of latest trading day of range  
     latest_close=$( latest_trade_close_of_range 27 31 "$month" "$year" )
+     if [ "$verbose" = true ]; then echo "Latest_close function returned $?" ; fi
       
     # get close of earliest trading day of range 
     earliest_close=$( earliest_trade_close_of_range 20 25 "$month" "$year" )
+    if [ "$verbose" = true ]; then echo "Earliest_close function returned $?" ; fi
     
     if latest_close >= earliest_close*$((1+sideways_threshold))
     then
