@@ -43,13 +43,14 @@ local year=$4
         # Grab the adjusted close
         grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%d) 
         latest_close=$( grep "${grepdate}" "${symbol}".csv | awk ' { print $6 } ' )
-        echo "${latest_close}"
         break  # We found the day, no need to keep iterating
       else
         continue
       fi
     fi
   done
+  echo "${latest_close}"
+
 }  # latest_trade_close_of_range
 
 earliest_trade_close_of_range() {
@@ -73,13 +74,15 @@ local year=$4
         # Grab the adjusted close
          
         earliest_close=$( grep "$year-$month-$i" "${symbol}".csv | awk ' { print $6 } ' )
-        echo "${earliest_close}"
+        echo "earliest close between days $day1 and $day2 is ${earliest_close}"
         break  # We found the day, no need to keep iterating
       else
         continue
       fi
     fi
   done
+  
+  echo ${earliest_close}
 }  # earliest_trade_close_of_range
 
 # main -------------
