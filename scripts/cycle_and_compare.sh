@@ -30,7 +30,7 @@ local month=$3
 local year=$4
 
   for (( i=day2; i<=day1; i-- )); do
-    if [ "$verbose" = true ]; then echo "Evaluating $month $i, $year" ; fi
+    if [ "$verbose" = true ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
     
     if is_past "${today}" "$year" "$month" "$i" 
     then 
@@ -59,7 +59,7 @@ local day2=$2
 local month=$3
 local year=$4
 
-  for (( i=day2; i>=day1; i++ )); do
+  for (( i=day1; i>=day2; i++ )); do
     if [ "$verbose" = true ]; then echo "Evaluating $month $i, $year" ; fi
     
     if is_past "${today}" "$year" "$month" "$i" 
