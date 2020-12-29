@@ -30,7 +30,7 @@ local month=$3
 local year=$4
 
   for (( i=day2; i<=day1; i-- )); do
-    if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
+    #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
     
     if is_past "${today}" "$year" "$month" "$i" 
     then 
@@ -49,8 +49,8 @@ local year=$4
       fi
     fi
   done
-   if [ "$verbose" = 0 ]; then echo "latest_close day was latest_close" ; fi
-  return latest_close
+  echo "latest_close" ; fi
+ 
 
 }  # latest_trade_close_of_range
 
@@ -62,10 +62,10 @@ local month=$3
 local year=$4
 
   for (( i=day1; i>=day2; i++ )); do
-    if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; fi
+    #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; fi
     
     if is_past "${today}" "$year" "$month" "$i" 
-    if [ "$verbose" = 0 ]; then echo "is_past function returned $?" ; fi
+    #if [ "$verbose" = 0 ]; then echo "is_past function returned $?" ; fi
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
       continue
@@ -76,15 +76,14 @@ local year=$4
         # Grab the adjusted close
          
         earliest_close=$( grep "$year-$month-$i" "${symbol}".csv | awk ' { print $6 } ' )
-        echo "earliest close between days $day1 and $day2 is ${earliest_close}"
+        #echo "earliest close between days $day1 and $day2 is ${earliest_close}"
         break  # We found the day, no need to keep iterating
       else
         continue
       fi
     fi
   done
-  if [ "$verbose" = 0 ]; then echo "earliest_close day was earliest_close" ; fi
-  return earliest_close
+  echo "earliest_close" ; fi
 }  # earliest_trade_close_of_range
 
 # main -------------
