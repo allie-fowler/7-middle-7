@@ -49,7 +49,7 @@ local year=$4
       fi
     fi
   done
-  echo "latest_close" 
+  echo "$latest_close" 
 }  # latest_trade_close_of_range
 
 earliest_trade_close_of_range() {
@@ -81,7 +81,7 @@ local year=$4
       fi
     fi
   done
-  echo "earliest_close" 
+  echo "$earliest_close" 
 }  # earliest_trade_close_of_range
 
 # main -------------
