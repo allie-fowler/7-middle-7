@@ -2,7 +2,7 @@
 # Steps through past 11 years
 # Compares for each segment of each past month
 # Tallies the counters
-set -x
+set -xv
 
 function usage {
         echo "./$(basename "$0") [-v] [-h] "
