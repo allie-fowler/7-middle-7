@@ -38,11 +38,11 @@ local my_result=$5
       continue
     else
       # get the back_b close and break the loop.  if not there, discontinue this iteration and go on with next value
-      if grep "$year-$month-$i" "${symbol}".csv
+      if grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv
       then
         # Grab the adjusted close
         grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%d) 
-        latest_close=$( grep "${grepdate}" "${symbol}".csv | awk ' { print $6 } ' )
+        latest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
         break  # We found the day, no need to keep iterating
       else
         continue
@@ -74,7 +74,7 @@ local my_result=$5
       then
         # Grab the adjusted close
          
-        earliest_close=$( grep "$year-$month-$i" "${symbol}".csv | awk ' { print $6 } ' )
+        earliest_close=$( grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
         #echo "earliest close between days $day1 and $day2 is ${earliest_close}"
         break  # We found the day, no need to keep iterating
       else
