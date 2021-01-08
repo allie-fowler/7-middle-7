@@ -28,6 +28,7 @@ local day1=$1
 local day2=$2
 local month=$3
 local year=$4
+local my_result=$5
 
   for (( i=day2; i<=day1; i-- )); do
     #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
@@ -49,7 +50,7 @@ local year=$4
       fi
     fi
   done
-  echo "$latest_close" 
+    eval "$5="$latest_close" 
 }  # latest_trade_close_of_range
 
 earliest_trade_close_of_range() {
@@ -58,6 +59,7 @@ local day1=$1
 local day2=$2
 local month=$3
 local year=$4
+local my_result=$5
 
   for (( i=day1; i>=day2; i++ )); do
     #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; fi
@@ -81,7 +83,7 @@ local year=$4
       fi
     fi
   done
-  echo "$earliest_close" 
+  eval "$5="$earliest_close" 
 }  # earliest_trade_close_of_range
 
 # main -------------
@@ -114,11 +116,13 @@ do
     
     # Process for last 7 days of month
     # get close of latest trading day of range  
-    latest_close=$( latest_trade_close_of_range 27 31 "$month" "$year" )
+    latest_close=""
+    latest_trade_close_of_range 27 31 "$month" "$year" "${latest_close}" 
      if [ "$verbose" = 0 ]; then echo "Latest_close function returned ${latest_close}" ; fi
       
     # get close of earliest trading day of range 
-    earliest_close=$( earliest_trade_close_of_range 20 25 "$month" "$year" )
+    earliest_close=""
+    earliest_trade_close_of_range 20 25 "$month" "$year" "${earliest_close} 
     if [ "$verbose" = 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
     
     if "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold)))
