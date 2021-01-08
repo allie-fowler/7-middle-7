@@ -49,7 +49,7 @@ local my_result=$5
       fi
     fi
   done
-    eval "$5="$latest_close" 
+  eval "$5=${latest_close}" 
 }  # latest_trade_close_of_range
 
 earliest_trade_close_of_range() {
@@ -82,11 +82,11 @@ local my_result=$5
       fi
     fi
   done
-  eval "$5="$earliest_close" 
+  eval "$5=${earliest_close}" 
 }  # earliest_trade_close_of_range
 
 # main -------------
-verbose = 1
+verbose=1
 # list of arguments expected in the input
 # We use "$@" instead of $* to preserve argument-boundary information
 while getopts hvs: name
