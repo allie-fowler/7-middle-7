@@ -71,7 +71,7 @@ local my_result=$5
       continue
     else
       # get the front close and break the loop.  if not there, discontinue this iteration and go on with next value
-      if grep "$year-$month-$i" "${symbol}".csv
+      if grep "$year-$month-$i" "${GITHUB_WORKSPACE}"/input/historical/"${symbol}".csv
       then
         # Grab the adjusted close
          
