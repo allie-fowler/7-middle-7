@@ -122,7 +122,7 @@ do
       
     # get close of earliest trading day of range 
     earliest_close=""
-    earliest_trade_close_of_range 20 25 "$month" "$year" "${earliest_close} 
+    earliest_trade_close_of_range 20 25 "$month" "$year" "${earliest_close}" 
     if [ "$verbose" = 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
     
     if "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold)))
