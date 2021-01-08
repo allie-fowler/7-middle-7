@@ -2,7 +2,6 @@
 # Steps through past 11 years
 # Compares for each segment of each past month
 # Tallies the counters
-set -xv
 
 function usage {
         echo "./$(basename "$0") [-v] [-h] "
@@ -87,7 +86,7 @@ local my_result=$5
 }  # earliest_trade_close_of_range
 
 # main -------------
-verbose=1
+verbose = 1
 # list of arguments expected in the input
 # We use "$@" instead of $* to preserve argument-boundary information
 while getopts hvs: name
@@ -104,10 +103,11 @@ do
           ;;
      esac
 done
- 
+
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | cut -c 8-13)
 # Cycle through the last 11 years
+set -xv
 for (( year=this_year; year>=year-11; year-- ))
 do
   for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
