@@ -15,6 +15,10 @@ is_past () {
   then 
     if [ "$verbose" = 0 ]; then echo "This date is after today.  Not valid." ; fi
     return 1;  # 1 is false
+  elseif [[ (( $(date +%b) == "$3" )) && (( $(date +%Y) == "$2" )) ]]
+  then
+    if [ "$verbose" = 0 ]; then echo "Ignoring data for this month." ; fi
+    return 1;  # 1 is false  
   else 
     if [ "$verbose" = 0 ]; then echo "This date is past.  Valid for evaluation." ; fi
     return 0;  # 0 is true
