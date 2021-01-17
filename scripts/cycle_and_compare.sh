@@ -86,7 +86,7 @@ local my_result=$5
 }  # earliest_trade_close_of_range
 
 # main -------------
-verbose=0
+verbose=1
 # list of arguments expected in the input
 # We use "$@" instead of $* to preserve argument-boundary information
 while getopts hvs: name
