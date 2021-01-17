@@ -42,7 +42,7 @@ local my_result=$5
       then
         # Grab the adjusted close
         grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%d) 
-        latest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
+        local latest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
         break  # We found the day, no need to keep iterating
       else
         continue
@@ -74,7 +74,7 @@ local my_result=$5
       then
         # Grab the adjusted close
          
-        earliest_close=$( grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
+        local earliest_close=$( grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
         #echo "earliest close between days $day1 and $day2 is ${earliest_close}"
         break  # We found the day, no need to keep iterating
       else
