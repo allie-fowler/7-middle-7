@@ -31,7 +31,6 @@ local day1=$1
 local day2=$2
 local month=$3
 local year=$4
-local my_result=$5
 
 for (( i=$day2; i>=$day1; i=i-1 )); do
 #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
@@ -40,7 +39,7 @@ for (( i=$day2; i>=$day1; i=i-1 )); do
   if grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv
   then
     # Grab the adjusted close
-    grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%d) 
+    grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%i) 
     local latest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
     break  # We found the day, no need to keep iterating
   else
@@ -56,7 +55,6 @@ local day1=$1
 local day2=$2
 local month=$3
 local year=$4
-local my_result=$5
 
 for (( i=$day1; i<=$day2; i=i+1 )); do
     #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; fi
@@ -65,7 +63,7 @@ for (( i=$day1; i<=$day2; i=i+1 )); do
     if grep "$year-$month-$i" "${GITHUB_WORKSPACE}"/input/historical/"${symbol}".csv
     then
       # Grab the adjusted close
-      grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%d) 
+      grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%i) 
       local earliest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
       #echo "earliest close between days $day1 and $day2 is ${earliest_close}"
       break  # We found the day, no need to keep iterating
