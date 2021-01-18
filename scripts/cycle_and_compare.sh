@@ -97,15 +97,17 @@ done
 
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | cut -c 8-13)
+first_year=$(expr this_year - 11)
 # Cycle through the last 11 years
 set -x
-for (( year=this_year; year>=year-11; year-- ))
+for (( year=this_year; year>=first_year; year-- ))
 do
   for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
   do
     echo "Processing for Month: $month Year: $year"
     
-    if ! is_past "${today}" "$year" "$month" "1" 
+    result=is_past "${today}" "$year" "$month" "1" 
+    if [ result == 0 ]
     if [ "$verbose" = 0 ]; then echo "is_past function returned $is_past" ; fi
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
