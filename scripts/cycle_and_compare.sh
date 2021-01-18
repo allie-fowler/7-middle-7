@@ -77,8 +77,8 @@ local my_result=$5
       if grep "$year-$month-$i" "${GITHUB_WORKSPACE}"/input/historical/"${symbol}".csv
       then
         # Grab the adjusted close
-         
-        local earliest_close=$( grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
+        grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%d) 
+        local earliest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
         #echo "earliest close between days $day1 and $day2 is ${earliest_close}"
         break  # We found the day, no need to keep iterating
       else
@@ -111,7 +111,7 @@ done
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | cut -c 8-13)
 # Cycle through the last 11 years
-set -xv
+set -x
 for (( year=this_year; year>=year-11; year-- ))
 do
   for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
