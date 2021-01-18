@@ -105,7 +105,7 @@ do
   do
     echo "Processing for Month: $month Year: $year"
     
-    if is_past "${today}" "$year" "$month" "$i" 
+    if is_past "${today}" "$year" "$month" "1" 
     #if [ "$verbose" = 0 ]; then echo "is_past function returned $?" ; fi
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
