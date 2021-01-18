@@ -15,7 +15,7 @@ is_past () {
   then 
     if [ "$verbose" = 0 ]; then echo "This date is after today.  Not valid." ; fi
     return 1;  # 1 is false
-  elif [[ (( $(date +%b) == "$3" )) && (( $(date +%Y) == "$2" )) ]]
+  elif [[ (( $(date +%m) == "$3" )) && (( $(date +%Y) == "$2" )) ]]
   then
     if [ "$verbose" = 0 ]; then echo "Ignoring data for this month." ; fi
     return 1;  # 1 is false  
@@ -102,7 +102,7 @@ first_year=$(expr this_year - 11)
 set -x
 for (( year=this_year; year>=first_year; year-- ))
 do
-  for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+  for month in {1..12}
   do
     echo "Processing for Month: $month Year: $year"
     
@@ -144,7 +144,7 @@ do
 done  # year
 
 # Cycle through months and directions
-for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+for month in {1..12}
   do
     echo "Month:  $month   UP: ${[month]_[period]_up}  DOWN:  ${[month]_[period]_down}      SIDEWAYS:  ${[month]_[period]_side}"
   done
