@@ -126,13 +126,13 @@ do
     
       if "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold)))
       then
-        export "{!month}_{!period}_up}"++
+        export ((_{!month}_{!period}_up}++))
 
       elif "${latest_close}" <= $(("${earliest_close}"*(1-sideways_threshold)))
       then
-        export "{!month}_{!period}_down}"++
+        export ((_{!month}_{!period}_down}++))
       else
-        export export "{!month}_{!period}_side}"++
+        export ((_{!month}_{!period}_side}++))
       fi
         
       # Process for middle 7
@@ -146,5 +146,5 @@ done  # year
 # Cycle through months and directions
 for month in {1..12}
   do
-    echo "Month:  $month   UP: ${[month]_[period]_up}  DOWN:  ${[month]_[period]_down}      SIDEWAYS:  ${[month]_[period]_side}"
+    echo "Month:  $month   UP: ${_[month]_[period]_up}  DOWN:  ${_[month]_[period]_down}      SIDEWAYS:  ${_[month]_[period]_side}"
   done
