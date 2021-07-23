@@ -1,0 +1,42 @@
+name: Lint
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  lint-the-code:
+    #  First job of the workflow.  Lint all of the things! 
+    name: Lint All The Things
+    # Set the agent to run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      ################################
+      # Run Linter against code base #
+      ################################
+      - name: SuperLinter
+        uses: github/super-linter@v3
+        env:
+          VALIDATE_PYTHON: false
+          VALIDATE_PYTHON_BLACK: false
+          VALIDATE_PYTHON_FLAKE8: false
+          VALIDATE_PYTHON_ISORT: false
+          VALIDATE_PYTHON_PYLINT: false
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: main
+          ERROR_ON_MISSING_EXEC_BIT: false
+          VALIDATE_BASH_EXEC: false
+          OUTPUT_DETAILS: detailed
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            
