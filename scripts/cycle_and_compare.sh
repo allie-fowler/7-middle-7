@@ -129,8 +129,9 @@ do
         true # delete placeholder
         temp_var_name="_${month}_${period}_up"
         if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
-        export ((${!temp_var_name}++))
+        ((${!temp_var_name}++))
         if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        export ${!temp_var_name}
       elif [ ! "${latest_close}" \< $(("${earliest_close}"*(1-sideways_threshold))) ]
       then
         true # delete placeholder
