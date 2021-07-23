@@ -126,11 +126,14 @@ do
     
       if [ "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold))) ]
       then
+        true # delete placeholder
         #export ((_{!month}_{!period}_up}++))
       elif [ "${latest_close}" <= $(("${earliest_close}"*(1-sideways_threshold))) ]
       then
+        true # delete placeholder
       #  export ((_{!month}_{!period}_down}++))
       else
+        true #delete placeholder
       #  export ((_{!month}_{!period}_side}++))
       fi
         
