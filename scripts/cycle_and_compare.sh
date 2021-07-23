@@ -124,15 +124,15 @@ do
       earliest_trade_close_of_range 20 25 "$month" "$year" "${earliest_close}" 
       if [ "$verbose" = 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
     
-      #if [ "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold))) ]
-      #then
-      #  export ((_{!month}_{!period}_up}++))
+      if [ "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold))) ]
+      then
+        export ((_{!month}_{!period}_up}++))
       #elif [ "${latest_close}" <= $(("${earliest_close}"*(1-sideways_threshold))) ]
       #then
       #  export ((_{!month}_{!period}_down}++))
       #else
       #  export ((_{!month}_{!period}_side}++))
-      #fi
+      fi
         
       # Process for middle 7
         # Find first market day on or after 10th
