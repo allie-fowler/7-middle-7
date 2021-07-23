@@ -34,7 +34,7 @@ local year=$4
 local latest_close
 
 for (( i=day2; i>=day1; i=i-1 )); do
-#if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
+if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
     
   # get the back_b close and break the loop.  if not there, discontinue this iteration and go on with next value
   if grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv
@@ -59,7 +59,7 @@ local year=$4
 local earliest_close
 
 for (( i=day1; i<=day2; i=i+1 )); do
-    #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; fi
+    if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; fi
     
     # get the front close and break the loop.  if not there, discontinue this iteration and go on with next value
     if grep "$year-$month-$i" "${GITHUB_WORKSPACE}"/input/historical/"${symbol}".csv
@@ -67,7 +67,7 @@ for (( i=day1; i<=day2; i=i+1 )); do
       # Grab the adjusted close
       grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%i) 
       earliest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
-      #echo "earliest close between days $day1 and $day2 is ${earliest_close}"
+      echo "earliest close between days $day1 and $day2 is ${earliest_close}"
       break  # We found the day, no need to keep iterating
     else
       continue
@@ -126,11 +126,11 @@ do
     
       if [ "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold))) ]
       then
-        export ((_{!month}_{!period}_up}++))
-      #elif [ "${latest_close}" <= $(("${earliest_close}"*(1-sideways_threshold))) ]
-      #then
+        #export ((_{!month}_{!period}_up}++))
+      elif [ "${latest_close}" <= $(("${earliest_close}"*(1-sideways_threshold))) ]
+      then
       #  export ((_{!month}_{!period}_down}++))
-      #else
+      else
       #  export ((_{!month}_{!period}_side}++))
       fi
         
