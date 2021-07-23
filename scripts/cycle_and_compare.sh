@@ -111,18 +111,18 @@ do
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
       continue
-    #else
+    else
       # Process for last 7 days of month
       # get close of latest trading day of range 
-      #if [ "$verbose" = 0 ]; then echo "is_past function returned $result" ; fi
-      #latest_close=""
-      #latest_trade_close_of_range 27 31 "$month" "$year" "${latest_close}" 
-      #if [ "$verbose" = 0 ]; then echo "Latest_close function returned ${latest_close}" ; fi
+      if [ "$verbose" = 0 ]; then echo "is_past function returned $result" ; fi
+      latest_close=""
+      latest_trade_close_of_range 27 31 "$month" "$year" "${latest_close}" 
+      if [ "$verbose" = 0 ]; then echo "Latest_close function returned ${latest_close}" ; fi
       
       # get close of earliest trading day of range 
-      #earliest_close=""
-      #earliest_trade_close_of_range 20 25 "$month" "$year" "${earliest_close}" 
-      #if [ "$verbose" = 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
+      earliest_close=""
+      earliest_trade_close_of_range 20 25 "$month" "$year" "${earliest_close}" 
+      if [ "$verbose" = 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
     
       #if [ "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold))) ]
       #then
