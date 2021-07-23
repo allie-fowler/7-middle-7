@@ -33,7 +33,7 @@ local month=$3
 local year=$4
 local latest_close
 
-for (( i=$day2; i>=$day1; i=i-1 )); do
+for (( i=day2; i>=day1; i=i-1 )); do
 #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
     
   # get the back_b close and break the loop.  if not there, discontinue this iteration and go on with next value
@@ -58,7 +58,7 @@ local month=$3
 local year=$4
 local earliest_close
 
-for (( i=$day1; i<=$day2; i=i+1 )); do
+for (( i=day1; i<=day2; i=i+1 )); do
     #if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; fi
     
     # get the front close and break the loop.  if not there, discontinue this iteration and go on with next value
@@ -97,7 +97,7 @@ done
 
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | cut -c 8-13)
-first_year=$(expr this_year - 11)
+first_year=${this_year - 11}
 # Cycle through the last 11 years
 set -x
 for (( year=this_year; year>=first_year; year-- ))
@@ -107,7 +107,7 @@ do
     echo "Processing for Month: $month Year: $year"
     
     result=is_past "${today}" "$year" "$month" "1" 
-    if [ result == 0 ]
+    if [ "$result" == "0" ]
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
       continue
