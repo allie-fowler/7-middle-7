@@ -126,7 +126,6 @@ do
     
       if [ ! "${latest_close}" \< $(("${earliest_close}"*(1+sideways_threshold))) ]
       then
-        true # delete placeholder
         temp_var_name="_${month}_${period}_up"
         if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         ((${!temp_var_name}++))
@@ -134,11 +133,17 @@ do
         export ${!temp_var_name}
       elif [ ! "${latest_close}" \< $(("${earliest_close}"*(1-sideways_threshold))) ]
       then
-        true # delete placeholder
-      #  export ((_{!month}_{!period}_down}++))
+        temp_var_name="_${month}_${period}_down"
+        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        ((${!temp_var_name}++))
+        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        export ${!temp_var_name}
       else
-        true #delete placeholder
-      #  export ((_{!month}_{!period}_side}++))
+        temp_var_name="_${month}_${period}_side"
+        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        ((${!temp_var_name}++))
+        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        export ${!temp_var_name}
       fi
         
       # Process for middle 7
