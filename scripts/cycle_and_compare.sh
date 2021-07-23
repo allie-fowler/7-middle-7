@@ -106,7 +106,7 @@ do
   do
     echo "Processing for Month: $month Year: $year"
     
-    result=is_past "${today}" "$year" "$month" "1" 
+    result=$(is_past "${today}" "$year" "$month" "1") 
     if [ "$result" == "0" ]
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
@@ -114,7 +114,7 @@ do
     else
       # Process for last 7 days of month
       # get close of latest trading day of range 
-      if [ "$verbose" = 0 ]; then echo "is_past function returned $is_past" ; fi
+      if [ "$verbose" = 0 ]; then echo "is_past function returned $result" ; fi
       latest_close=""
       latest_trade_close_of_range 27 31 "$month" "$year" "${latest_close}" 
       if [ "$verbose" = 0 ]; then echo "Latest_close function returned ${latest_close}" ; fi
