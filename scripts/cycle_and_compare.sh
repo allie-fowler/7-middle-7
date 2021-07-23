@@ -108,13 +108,13 @@ do
     
     result=is_past "${today}" "$year" "$month" "1" 
     if [ result == 0 ]
-    if [ "$verbose" = 0 ]; then echo "is_past function returned $is_past" ; fi
     then 
       # Discontinue this iteration of the for-day loop and go on with the next value
       continue
     else
       # Process for last 7 days of month
-      # get close of latest trading day of range  
+      # get close of latest trading day of range 
+      if [ "$verbose" = 0 ]; then echo "is_past function returned $is_past" ; fi
       latest_close=""
       latest_trade_close_of_range 27 31 "$month" "$year" "${latest_close}" 
        if [ "$verbose" = 0 ]; then echo "Latest_close function returned ${latest_close}" ; fi
@@ -127,7 +127,6 @@ do
       if "${latest_close}" >= $(("${earliest_close}"*(1+sideways_threshold)))
       then
         export ((_{!month}_{!period}_up}++))
-
       elif "${latest_close}" <= $(("${earliest_close}"*(1-sideways_threshold)))
       then
         export ((_{!month}_{!period}_down}++))
@@ -145,6 +144,6 @@ done  # year
 
 # Cycle through months and directions
 for month in {1..12}
-  do
-    echo "Month:  $month   UP: ${_[month]_[period]_up}  DOWN:  ${_[month]_[period]_down}      SIDEWAYS:  ${_[month]_[period]_side}"
-  done
+do
+  echo "Month:  $month   UP: ${_[month]_[period]_up}  DOWN:  ${_[month]_[period]_down}      SIDEWAYS:  ${_[month]_[period]_side}"
+done
