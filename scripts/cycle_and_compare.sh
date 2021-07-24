@@ -14,15 +14,15 @@ is_past () {
 # (( $(date -d "2014-12-01T21:34:03+02:00" +%s) < $(date -d "2014-12-01T21:35:03+02:00" +%s) ))
   if [[ (( $(date +%s) < $(date -d "${1}-${2}-${3} " +%s) )) ]]
   then 
-    if [ "$verbose" = 0 ]; then echo "This date is after today.  Not valid." ; fi
     echo 1;  # 1 is false
+    if [ "$verbose" = 0 ]; then echo "This date is after today.  Not valid." ; fi    
   elif [[ (( $(date +%m) == "$2" )) && (( $(date +%Y) == "$1" )) ]]
   then
-    if [ "$verbose" = 0 ]; then echo "Ignoring data for this month." ; fi
-    echo 1;  # 1 is false  
+    echo 1;  # 1 is false 
+    if [ "$verbose" = 0 ]; then echo "Ignoring data for this month." ; fi 
   else 
-    if [ "$verbose" = 0 ]; then echo "This date is past.  Valid for evaluation." ; fi
     echo "0";  # 0 is true
+    if [ "$verbose" = 0 ]; then echo "This date is past.  Valid for evaluation." ; fi
   fi  
 }
 
