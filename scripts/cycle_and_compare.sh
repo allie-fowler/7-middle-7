@@ -15,14 +15,14 @@ is_past () {
   if [[ (( $(date +%s) < $(date -d "${1}-${2}-${3} " +%s) )) ]]
   then 
     echo 1;  # 1 is false
-    if [ "$verbose" = 0 ]; then echo "This date is after today.  Not valid." ; fi    
+    if [ $verbose -eq 0 ]; then echo "This date is after today.  Not valid." ; fi    
   elif [[ (( $(date +%m) == "$2" )) && (( $(date +%Y) == "$1" )) ]]
   then
     echo 1;  # 1 is false 
-    if [ "$verbose" = 0 ]; then echo "Ignoring data for this month." ; fi 
+    if [ $verbose -eq 0 ]; then echo "Ignoring data for this month." ; fi 
   else 
     echo "0";  # 0 is true
-    if [ "$verbose" = 0 ]; then echo "This date is past.  Valid for evaluation." ; fi
+    if [ $verbose -eq 0 ]; then echo "This date is past.  Valid for evaluation." ; fi
   fi  
 }
 
@@ -35,7 +35,7 @@ local year=$4
 local latest_close
 
 for (( i=day2; i>=day1; i=i-1 )); do
-if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
+if [ $verbose -eq 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
     
   # get the back_b close and break the loop.  if not there, discontinue this iteration and go on with next value
   if grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv
@@ -48,7 +48,7 @@ if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i";
     continue
   fi
 done
-eval "$5=${latest_close}" 
+echo "${latest_close}" 
 }  # latest_trade_close_of_range
 
 earliest_trade_close_of_range() {
@@ -60,7 +60,7 @@ local year=$4
 local earliest_close
 
 for (( i=day1; i<=day2; i=i+1 )); do
-    if [ "$verbose" = 0 ]; then echo "Evaluating $month $i, $year" ; fi
+    if [ $verbose -eq 0 ]; then echo "Evaluating $month $i, $year" ; fi
     
     # get the front close and break the loop.  if not there, discontinue this iteration and go on with next value
     if grep "$year-$month-$i" "${GITHUB_WORKSPACE}"/input/historical/"${symbol}".csv
@@ -74,7 +74,7 @@ for (( i=day1; i<=day2; i=i+1 )); do
       continue
     fi
 done
-eval "$5=${earliest_close}" 
+echo "${earliest_close}" 
 }  # earliest_trade_close_of_range
 
 # main -------------
@@ -98,9 +98,9 @@ done
 
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | cut -c 7-13)
-if [ "$verbose" = 0 ]; then echo "This year is ${this_year}" ; fi
+if [ $verbose -eq 0 ]; then echo "This year is ${this_year}" ; fi
 first_year=$((this_year - 11))
-if [ "$verbose" = 0 ]; then echo "First year is ${first_year}" ; fi
+if [ $verbose -eq 0 ]; then echo "First year is ${first_year}" ; fi
 # Cycle through the last 11 years
 for (( year=this_year; year>=first_year; year-- ))
 do
@@ -112,40 +112,42 @@ do
     if [ "$result" == "0" ]
     then 
       # Throw away the date if it's in the future and go on with the next value
-      if [ "$verbose" = 0 ]; then echo "${result} is in the future.  Discarding." ; fi
+      if [ $verbose -eq 0 ]; then echo "${result} is in the future.  Discarding." ; fi
       continue
     else
       # Process for last 7 days of month
       # get closing price of latest trading day of range 
-      if [ "$verbose" = 0 ]; then echo "is_past function returned $result" ; fi
+      if [ $verbose -eq 0 ]; then echo "is_past function returned $result" ; fi
       latest_close=""
       latest_trade_close_of_range 27 31 "$month" "$year" "${latest_close}" 
-      if [ "$verbose" = 0 ]; then echo "Latest_close function returned ${latest_close}" ; fi
+      if [ $verbose -eq 0 ]; then echo "Latest_close function returned ${latest_close}" ; fi
+      if [ "${latest_close}" == "" ]; then echo "Latest close returned no data.  Skipping."; continue ; fi 
       
       # get close of earliest trading day of range 
       earliest_close=""
       earliest_trade_close_of_range 20 25 "$month" "$year" "${earliest_close}" 
-      if [ "$verbose" = 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
+      if [ $verbose -eq 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
+      if [ "${earliest_close}" == "" ]; then echo "Earliest close returned no data.  Skipping."; continue ; fi 
     
       if [ ! "${latest_close}" \< $(("${earliest_close}"*(1+sideways_threshold))) ]
       then
         temp_var_name="_${month}_${period}_up"
-        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        if [ $verbose -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         ((${!temp_var_name}++))
-        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        if [ $verbose -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         export ${!temp_var_name}
       elif [ ! "${latest_close}" \< $(("${earliest_close}"*(1-sideways_threshold))) ]
       then
         temp_var_name="_${month}_${period}_down"
-        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        if [ $verbose -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         ((${!temp_var_name}++))
-        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        if [ $verbose -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         export ${!temp_var_name}
       else
         temp_var_name="_${month}_${period}_side"
-        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        if [ $verbose -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         ((${!temp_var_name}++))
-        if [ "$verbose" = 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        if [ $verbose -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         export ${!temp_var_name}
       fi
         
