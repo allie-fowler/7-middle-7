@@ -16,7 +16,7 @@ is_past () {
   then 
     echo 1;  # 1 is false
     if [ "$verbose" -eq 0 ]; then echo "This date is after today.  Not valid." ; fi    
-  elif [[ (( $(date +%m) == "$2" )) && (( $(date +%Y) == "$1" )) ]]
+  elif [[ (( $(date +%m) -eq "$2" )) && (( $(date +%Y) -eq "$1" )) ]]
   then
     echo 1;  # 1 is false 
     if [ "$verbose" -eq 0 ]; then echo "Ignoring data for this month." ; fi 
