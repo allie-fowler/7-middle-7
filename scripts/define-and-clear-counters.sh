@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 # Set threshold that defines "sideways"
 # May have to change this for various symbols
