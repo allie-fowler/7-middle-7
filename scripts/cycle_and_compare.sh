@@ -2,6 +2,7 @@
 # Steps through past 11 years
 # Compares for each segment of each past month
 # Tallies the counters
+set -x
 
 function usage {
         echo "./$(basename "$0") [-v] [-h] "
@@ -97,9 +98,10 @@ done
 
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | cut -c 8-13)
+if [ "$verbose" = 0 ]; then echo "This year is ${this_year}" ; fi
 first_year=${this_year - 11}
+if [ "$verbose" = 0 ]; then echo "First year is ${first_year}" ; fi
 # Cycle through the last 11 years
-set -x
 for (( year=this_year; year>=first_year; year-- ))
 do
   for month in {1..12}
@@ -109,11 +111,12 @@ do
     result=$(is_past "${today}" "$year" "$month" "1") 
     if [ "$result" == "0" ]
     then 
-      # Discontinue this iteration of the for-day loop and go on with the next value
+      # Throw away the date if it's in the future and go on with the next value
+      if [ "$verbose" = 0 ]; then echo "${result} is in the future.  Discarding." ; fi
       continue
     else
       # Process for last 7 days of month
-      # get close of latest trading day of range 
+      # get closing price of latest trading day of range 
       if [ "$verbose" = 0 ]; then echo "is_past function returned $result" ; fi
       latest_close=""
       latest_trade_close_of_range 27 31 "$month" "$year" "${latest_close}" 
