@@ -12,7 +12,7 @@ function usage {
 is_past () {
 # parameters:  today's date YYYY-MM-DD, comparison year YYYY, comparison month MM, comparison day DD
 # (( $(date -d "2014-12-01T21:34:03+02:00" +%s) < $(date -d "2014-12-01T21:35:03+02:00" +%s) ))
-  if [[ (( $(date +%s) < $(date -d "${2} ${3} ${1}" +%s) )) ]]
+  if [[ (( $(date +%s) < $(date -d "${1}-${2}-${3} " +%s) )) ]]
   then 
     if [ "$verbose" = 0 ]; then echo "This date is after today.  Not valid." ; fi
     return 1;  # 1 is false
