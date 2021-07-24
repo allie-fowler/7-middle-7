@@ -97,9 +97,9 @@ do
 done
 
 source scripts/define-and-clear-counters.sh
-this_year=$(echo "${today}" | cut -c 8-13)
+this_year=$(echo "${today}" | cut -c 7-13)
 if [ "$verbose" = 0 ]; then echo "This year is ${this_year}" ; fi
-first_year=${this_year - 11}
+first_year=$((this_year - 11))
 if [ "$verbose" = 0 ]; then echo "First year is ${first_year}" ; fi
 # Cycle through the last 11 years
 for (( year=this_year; year>=first_year; year-- ))
