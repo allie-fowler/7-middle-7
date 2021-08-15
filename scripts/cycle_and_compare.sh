@@ -167,6 +167,6 @@ do
     up_var_name="${month}_${period}_up"
     down_var_name="${month}_${period}_down"
     side_var_name="${month}_${period}_side"
-    echo "Month:  $month   UP: ${!up_var_name}  DOWN:  ${!up_var_name}      SIDEWAYS:  ${!side_var_name}"
+    echo "Month:  $month   UP: ${!up_var_name}  DOWN:  ${!down_var_name}      SIDEWAYS:  ${!side_var_name}"
   done
 done
