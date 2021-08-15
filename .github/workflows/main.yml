@@ -14,8 +14,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        
-
 
       - name: Get price history
         run: |
@@ -26,5 +24,3 @@ jobs:
             #python scripts/get_price_history.py -s ${symbol}
             bash scripts/cycle_and_compare.sh -v -s PSA
           done
-
-
