@@ -28,6 +28,7 @@ jobs:
       - name: SuperLinter
         uses: github/super-linter@v4
         env:
+          FILTER_REGEX_EXCLUDE: .*main.yml
           VALIDATE_PYTHON: false
           VALIDATE_PYTHON_BLACK: false
           VALIDATE_PYTHON_FLAKE8: false
