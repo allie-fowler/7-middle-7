@@ -165,9 +165,9 @@ for month in {1..12}
 do
   for period in front middle back
   do
-    up_var_name="${month}_${period}_up"
-    down_var_name="${month}_${period}_down"
-    side_var_name="${month}_${period}_side"
+    up_var_name="_${month}_${period}_up"
+    down_var_name="_${month}_${period}_down"
+    side_var_name="_${month}_${period}_side"
     echo "Month:  $month   UP: ${!up_var_name}  DOWN:  ${!down_var_name}      SIDEWAYS:  ${!side_var_name}"
   done
 done
