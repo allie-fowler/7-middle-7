@@ -41,7 +41,7 @@ if [ "$verbose" -eq 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i
   if grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv
   then
     # Grab the adjusted close
-    grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%i) 
+    grepdate=$(date -d "${year} ${month} ${i}" +%Y-%m-%i) 
     latest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
     break  # We found the day, no need to keep iterating
   else
@@ -66,7 +66,7 @@ for (( i=day1; i<=day2; i=i+1 )); do
     if grep "$year-$month-$i" "${GITHUB_WORKSPACE}"/input/historical/"${symbol}".csv
     then
       # Grab the adjusted close
-      grepdate=$(date -d "${month} ${i} ${year}" +%Y-%m-%i) 
+      grepdate=$(date -d "${year} ${month} ${i}" +%Y-%m-%i) 
       earliest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
       echo "earliest close between days $day1 and $day2 is ${earliest_close}"
       break  # We found the day, no need to keep iterating
@@ -162,5 +162,11 @@ done  # year
 # Cycle through months and directions
 for month in {1..12}
 do
-  echo "Month:  $month   UP: ${_[month]_[period]_up}  DOWN:  ${_[month]_[period]_down}      SIDEWAYS:  ${_[month]_[period]_side}"
+  for period in front middle back
+  do
+    up_var_name="${month}_${period}_up"
+    down_var_name="${month}_${period}_down"
+    side_var_name="${month}_${period}_side"
+    echo "Month:  $month   UP: ${!up_var_name}  DOWN:  ${!up_var_name}      SIDEWAYS:  ${!side_var_name}"
+  done
 done
