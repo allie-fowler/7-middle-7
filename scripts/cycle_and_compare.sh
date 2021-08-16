@@ -41,7 +41,7 @@ if [ "$verbose" -eq 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i
   if grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv
   then
     # Grab the adjusted close
-    grepdate=$(date -d "${year} ${month} ${i}" +%Y-%m-%i) 
+    grepdate=$(date -d "${year}-${month}-${i}" +%Y-%m-%d) 
     latest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
     break  # We found the day, no need to keep iterating
   else
@@ -66,7 +66,7 @@ for (( i=day1; i<=day2; i=i+1 )); do
     if grep "$year-$month-$i" "${GITHUB_WORKSPACE}"/input/historical/"${symbol}".csv
     then
       # Grab the adjusted close
-      grepdate=$(date -d "${year} ${month} ${i}" +%Y-%m-%i) 
+      grepdate=$(date -d "${year}-${month}-${i}" +%Y-%m-%d) 
       earliest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk ' { print $6 } ' )
       echo "earliest close between days $day1 and $day2 is ${earliest_close}"
       break  # We found the day, no need to keep iterating
