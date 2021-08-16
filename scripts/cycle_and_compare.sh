@@ -2,7 +2,6 @@
 # Steps through past 11 years
 # Compares for each segment of each past month
 # Tallies the counters
-set -x
 
 function usage {
         echo "./$(basename "$0") [-v] [-h] "
@@ -97,6 +96,7 @@ do
 done
 
 source scripts/define-and-clear-counters.sh
+set -x
 this_year=$(echo "${today}" | cut -c 7-13)
 if [ "$verbose" -eq 0 ]; then echo "This year is ${this_year}" ; fi
 first_year=$((this_year - 11))
@@ -167,6 +167,6 @@ do
     up_var_name="_${month}_${period}_up"
     down_var_name="_${month}_${period}_down"
     side_var_name="_${month}_${period}_side"
-    echo "Month:  $month   UP: ${!up_var_name}  DOWN:  ${!down_var_name}      SIDEWAYS:  ${!side_var_name}"
+    echo "Month:  ${month}    ${period}  UP: ${!up_var_name}  DOWN:  ${!down_var_name}      SIDEWAYS:  ${!side_var_name}"
   done
 done
