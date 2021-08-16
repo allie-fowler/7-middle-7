@@ -21,6 +21,9 @@ jobs:
           do 
             echo "Price history must be added manually for now."
             echo "Download 11 years of history using Yahoo's DOWNLOAD button"
+            # Force download of just PSA history
+            cd input ; wget https://query1.finance.yahoo.com/v7/finance/download/PSA?period1=1597606890&period2=1629142890&interval=1d&events=history&includeAdjustedClose=true
+            ls -al
             #python scripts/get_price_history.py -s ${symbol}
             bash scripts/cycle_and_compare.sh -v -s PSA
           done
