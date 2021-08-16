@@ -4,7 +4,7 @@
 # May have to change this for various symbols
 
 # 3% should be written as 0.03, for example
-export sideways_threshold=0.04
+export sideways_threshold=0.03
 
 for month in {1..12}
 do
