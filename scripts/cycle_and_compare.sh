@@ -34,7 +34,7 @@ local year=$4
 local latest_close
 
 for (( i=day2; i>=day1; i=i-1 )); do
-if [ "$verbose" -eq 0 ]; then echo "Evaluating $month $i, $year" ; echo "i is $i"; fi
+if [ "$verbose" -eq 0 ]; then echo "Evaluating Latest Close with $month $i, $year" ; echo "i is $i"; fi
     
   # get the back_b close and break the loop.  if not there, discontinue this iteration and go on with next value
   if grep "$year-$month-$i" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv
@@ -59,7 +59,7 @@ local year=$4
 local earliest_close
 
 for (( i=day1; i<=day2; i=i+1 )); do
-    if [ "$verbose" -eq 0 ]; then echo "Evaluating $month $i, $year" ; fi
+    if [ "$verbose" -eq 0 ]; then echo "Evaluating Earliest Close with $month $i, $year" ; fi
     
     # get the front close and break the loop.  if not there, discontinue this iteration and go on with next value
     if grep "$year-$month-$i" "${GITHUB_WORKSPACE}"/input/historical/"${symbol}".csv
