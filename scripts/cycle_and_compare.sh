@@ -119,13 +119,13 @@ do
       # get closing price of latest trading day of range 
       if [ "$verbose" -eq 0 ]; then echo "is_past function returned $result" ; fi
       latest_close=""
-      latest_trade_close_of_range 27 31 "$month" "$year" "${latest_close}" 
+      latest_close=$(latest_trade_close_of_range 27 31 "$month" "$year")
       if [ "$verbose" -eq 0 ]; then echo "Latest_close function returned ${latest_close}" ; fi
       if [ "${latest_close}" == "" ]; then echo "Latest close returned no data.  Skipping."; continue ; fi 
       
       # get close of earliest trading day of range 
       earliest_close=""
-      earliest_trade_close_of_range 20 25 "$month" "$year" "${earliest_close}" 
+      earliest_close=$(earliest_trade_close_of_range 20 25 "$month" "$year")
       if [ "$verbose" -eq 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
       if [ "${earliest_close}" == "" ]; then echo "Earliest close returned no data.  Skipping."; continue ; fi 
     
