@@ -129,14 +129,16 @@ do
       if [ "$verbose" -eq 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
       if [ "${earliest_close}" == "" ]; then echo "Earliest close returned no data.  Skipping."; continue ; fi 
     
-      if [ ! "${latest_close}" \< $(("${earliest_close}"*(1+sideways_threshold))) ]
+      max_threshold=$( echo "${earliest_close} * ( 1 + ${sideways_threshold} )" | bc )    
+      min_threshold=$( echo "${earliest_close} * ( 1 - ${sideways_threshold} )" | bc )
+      if [ ! "${latest_close}" \< "${max_threshold}" ]
       then
         temp_var_name="_${month}_${period}_up"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         ((${!temp_var_name}++))
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         export ${!temp_var_name}
-      elif [ ! "${latest_close}" \< $(("${earliest_close}"*(1-sideways_threshold))) ]
+      elif [ ! "${latest_close}" \< "${min_threshold}" ]
       then
         temp_var_name="_${month}_${period}_down"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
