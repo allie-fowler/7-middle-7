@@ -135,22 +135,22 @@ do
       then
         temp_var_name="_${month}_${period}_up"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
-        ((${!temp_var_name}++))
+        ((${temp_var_name}++))
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
-        export ${!temp_var_name}
+        export ${temp_var_name}
       elif [ ! "${latest_close}" \< "${min_threshold}" ]
       then
         temp_var_name="_${month}_${period}_down"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
-        ((${!temp_var_name}++))
+        ((${temp_var_name}++))
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
-        export ${!temp_var_name}
+        export ${temp_var_name}
       else
         temp_var_name="_${month}_${period}_side"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
-        ((${!temp_var_name}++))
+        ((${temp_var_name}++))
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
-        export ${!temp_var_name}
+        export ${temp_var_name}
       fi
         
       # Process for middle 7
