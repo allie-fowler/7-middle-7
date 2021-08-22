@@ -96,7 +96,6 @@ do
 done
 
 source scripts/define-and-clear-counters.sh
-set -x
 this_year=$(echo "${today}" | cut -c 7-13)
 if [ "$verbose" -eq 0 ]; then echo "This year is ${this_year}" ; fi
 first_year=$((this_year - 11))
@@ -135,21 +134,27 @@ do
       then
         temp_var_name="_${month}_${period}_up"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        # shellcheck disable=SC2004
         ((${temp_var_name}++))
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        # shellcheck disable=SC2163
         export ${temp_var_name}
       elif [ ! "${latest_close}" \< "${min_threshold}" ]
       then
         temp_var_name="_${month}_${period}_down"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        # shellcheck disable=SC2004
         ((${temp_var_name}++))
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        # shellcheck disable=SC2163
         export ${temp_var_name}
       else
         temp_var_name="_${month}_${period}_side"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        # shellcheck disable=SC2004
         ((${temp_var_name}++))
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
+        # shellcheck disable=SC2163
         export ${temp_var_name}
       fi
         
