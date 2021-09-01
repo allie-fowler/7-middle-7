@@ -67,7 +67,7 @@ for (( i=day1; i<=day2; i=i+1 )); do
     then
       # Grab the adjusted close
       earliest_close=$( grep "${grepdate}" "${GITHUB_WORKSPACE}/input/historical/${symbol}".csv | awk -F ',' ' { print $6 } ' )
-      echo "earliest close between days $day1 and $day2 is ${earliest_close}"
+      echo "Price on earliest close between days $day1 and $day2 is ${earliest_close}"
       break  # We found the day, stop iterating
     else
       continue
@@ -136,6 +136,7 @@ do
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2004
         ((${temp_var_name}++))
+        if [ "$verbose" -eq 0 ]; then echo "temp_var_name is now ${!temp_var_name}" ; fi
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2163
         export ${temp_var_name}
@@ -145,6 +146,7 @@ do
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2004
         ((${temp_var_name}++))
+        if [ "$verbose" -eq 0 ]; then echo "temp_var_name is now ${!temp_var_name}" ; fi
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2163
         export ${temp_var_name}
@@ -153,6 +155,7 @@ do
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2004
         ((${temp_var_name}++))
+        if [ "$verbose" -eq 0 ]; then echo "temp_var_name is now ${!temp_var_name}" ; fi
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2163
         export ${temp_var_name}
