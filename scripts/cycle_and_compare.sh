@@ -128,8 +128,8 @@ do
       if [ "$verbose" -eq 0 ]; then echo "Earliest_close function returned ${earliest_close}" ; fi
       if [ "${earliest_close}" == "" ]; then echo "Earliest close returned no data.  Skipping."; continue ; fi 
     
-      max_threshold=$( echo "${earliest_close} ${sideways_threshold}" | awk '{print $1 * (1 + $2)}' )    
-      min_threshold=$( echo "${earliest_close} ${sideways_threshold}" | awk '{print $1 * (1 - $2)}' )
+      max_threshold=$( echo "${earliest_close} ${sideways_threshold}" | awk '{ thresh = 1 + $2 ; print $1 * thresh }' )
+      min_threshold=$( echo "${earliest_close} ${sideways_threshold}" | awk '{ thresh = 1 - $2 ; print $1 * thresh }' )
       if [ ! "${latest_close}" \< "${max_threshold}" ]
       then
         temp_var_name="_${month}_${period}_up"
