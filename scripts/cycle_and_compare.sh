@@ -14,7 +14,7 @@ is_past () {
   if [[ (( $(date +%s) < $(date -d "${1}-${2}-${3} " +%s) )) ]]
   then 
     echo 1;  # 1 is false
-    if [ "$verbose" -eq 0 ]; then echo "This date is after today.  Not valid." ; fi    
+    if [ "$verbose" -eq 0 ]; then echo "This date is after today.  Not valid, ignoring." ; fi    
   elif [[ (( $(date +%-m) -eq "$2" )) && (( $(date +%Y) -eq "$1" )) ]]
   then
     echo 1;  # 1 is false 
@@ -34,7 +34,7 @@ local year=$4
 local latest_close
 
 for (( i=day2; i>=day1; i=i-1 )); do
-if [ "$verbose" -eq 0 ]; then echo "Evaluating Latest Close with $month $i, $year" ; echo "i is $i"; fi
+if [ "$verbose" -eq 0 ]; then echo "Checking if Latest Close date in range is $month $i, $year" ; echo "i is $i"; fi
   grepdate=$(date -d "${year}-${month}-${i}" +%Y-%m-%d)  
   [ "${grepdate}" = '' ] && continue  #skip to the next date if invalid like Feb 31st
   # get the back_b close and break the loop.  if not there, discontinue this iteration and go on with next value
@@ -59,7 +59,7 @@ local year=$4
 local earliest_close
 
 for (( i=day1; i<=day2; i=i+1 )); do
-    if [ "$verbose" -eq 0 ]; then echo "Evaluating Earliest Close with $month $i, $year" ; fi
+    if [ "$verbose" -eq 0 ]; then echo "Evaluating if Earliest Close date in range is $month $i, $year" ; fi
     grepdate=$(date -d "${year}-${month}-${i}" +%Y-%m-%d) 
     [ "${grepdate}" = '' ] && continue  #skip to the next date if invalid like Feb 31st 
     # get the front close and break the loop.  if not there, discontinue this iteration and go on with next value
@@ -94,13 +94,14 @@ do
           ;;
      esac
 done
-set -x
 
 source scripts/define-and-clear-counters.sh
+
+set -x
 this_year=$(echo "${today}" | cut -c 7-13)
 if [ "$verbose" -eq 0 ]; then echo "This year is ${this_year}" ; fi
 first_year=$((this_year - 11))
-if [ "$verbose" -eq 0 ]; then echo "First year is ${first_year}" ; fi
+if [ "$verbose" -eq 0 ]; then echo "First evaluation year is ${first_year}" ; fi
 # Cycle through the last 11 years
 for (( year=this_year; year>=first_year; year-- ))
 do
@@ -140,7 +141,7 @@ do
         if [ "$verbose" -eq 0 ]; then echo "${temp_var_name} value is now ${!temp_var_name}" ; fi
         # shellcheck disable=SC2163
         export ${temp_var_name}
-      elif [ ! "${latest_close}" \< "${min_threshold}" ]
+      elif [ ! "${latest_close}" \> "${min_threshold}" ]
       then
         temp_var_name="_${month}_${period}_down"
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
