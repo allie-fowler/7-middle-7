@@ -94,6 +94,7 @@ do
           ;;
      esac
 done
+set -x
 
 source scripts/define-and-clear-counters.sh
 this_year=$(echo "${today}" | cut -c 7-13)
@@ -136,7 +137,7 @@ do
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2004
         ((${temp_var_name}++))
-        if [ "$verbose" -eq 0 ]; then echo "temp_var_name is now ${!temp_var_name}" ; fi
+        if [ "$verbose" -eq 0 ]; then echo "${temp_var_name} value is now ${!temp_var_name}" ; fi
         # shellcheck disable=SC2163
         export ${temp_var_name}
       elif [ ! "${latest_close}" \< "${min_threshold}" ]
@@ -145,7 +146,7 @@ do
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2004
         ((${temp_var_name}++))
-        if [ "$verbose" -eq 0 ]; then echo "temp_var_name is now ${!temp_var_name}" ; fi
+        if [ "$verbose" -eq 0 ]; then echo "${temp_var_name} value is now ${!temp_var_name}" ; fi
         # shellcheck disable=SC2163
         export ${temp_var_name}
       else
@@ -153,7 +154,7 @@ do
         if [ "$verbose" -eq 0 ]; then echo "temp_var_name is ${temp_var_name}" ; fi
         # shellcheck disable=SC2004
         ((${temp_var_name}++))
-        if [ "$verbose" -eq 0 ]; then echo "temp_var_name is now ${!temp_var_name}" ; fi
+        if [ "$verbose" -eq 0 ]; then echo "${temp_var_name} value is now ${!temp_var_name}" ; fi
         # shellcheck disable=SC2163
         export ${temp_var_name}
       fi
@@ -167,7 +168,6 @@ do
 done  # year
 
 # Cycle through months and directions
-set -x
 for month in {1..12}
 do
   for period in front middle back
