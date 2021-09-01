@@ -15,7 +15,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Get price history
+      - name: Get history, compute, and report
         run: |
           for symbol in `cat input/workspace.sym` 
           do 
